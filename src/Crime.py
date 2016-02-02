@@ -96,7 +96,7 @@ def addVictims(doc, victims):
         relationship = doc.createElement("Relationship")
         relatedPerson.appendChild(relationship)
         text = doc.createTextNode(raw_input())
-        relationship.appendChild(text)ad
+        relationship.appendChild(text)
 
         doc = addPerson(doc, relatedPerson)
 
@@ -271,9 +271,11 @@ def store():
     for i in range(0, x, 1):
         doc = addItemStolen(doc, itemsStolen)
 
+    print("What is the address of the crime scene?")
     addressOfCrimeScene = doc.createElement("addressOfCrimeScene")
     crime.appendChild(addressOfCrimeScene)
-
+    text = doc.createTextNode(raw_input())
+    addressOfCrimeScene.appendChild(text)
 
     for i in doc.getElementsByTagName("fish"):
         environment = doc.createElement("environment")
