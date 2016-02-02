@@ -91,6 +91,13 @@ def addVictims(doc, victims):
     if (check[0] == 'y' or check[0] == 'Y'):
         relatedPerson = doc.createElement("RelatedPerson")
         victim.appendChild(relatedPerson)
+
+        print("What is the relationship with the victim?")
+        relationship = doc.createElement("Relationship")
+        relatedPerson.appendChild(relationship)
+        text = doc.createTextNode(raw_input())
+        relationship.appendChild(text)ad
+
         doc = addPerson(doc, relatedPerson)
 
     print("Please enter a description of the victim")
