@@ -1,6 +1,7 @@
 from xml.dom.minidom import *
 
 
+
 def format(doc):
     return  parseString(doc.toprettyxml())
 
@@ -205,6 +206,8 @@ def store():
     crime = doc.createElement("Crime")
     doc.appendChild(crime)
 
+
+    #Victims
     victims = doc.createElement("Victims")
     crime.appendChild(victims)
 
@@ -222,7 +225,7 @@ def store():
         doc = addVictims(doc, victims)
 
 
-
+    #Witness
     witness = doc.createElement("Witness")
     crime.appendChild(witness)
 
@@ -240,6 +243,7 @@ def store():
         doc = addWitness(doc, witness)
 
 
+    #Evidence
     evidence = doc.createElement("Evidence")
     crime.appendChild(evidence)
 
@@ -256,6 +260,8 @@ def store():
     for i in range(0, x, 1):
         doc = addEvidence(doc, evidence)
 
+
+    #Stolen Items
     itemsStolen = doc.createElement("ItemsStolen")
     crime.appendChild(itemsStolen)
     x = int()
@@ -271,22 +277,23 @@ def store():
     for i in range(0, x, 1):
         doc = addItemStolen(doc, itemsStolen)
 
+
+    #Crime Scene address
     print("What is the address of the crime scene?")
     addressOfCrimeScene = doc.createElement("addressOfCrimeScene")
     crime.appendChild(addressOfCrimeScene)
     text = doc.createTextNode(raw_input())
     addressOfCrimeScene.appendChild(text)
 
-    for i in doc.getElementsByTagName("fish"):
-        environment = doc.createElement("environment")
-        i.appendChild(environment)
-        print i
 
+    #Format doc
     doc = format(doc)
 
+    #write xml file
     out = open("../XML/crime.xml", 'w')
     doc.writexml(out)
     out.flush()
     out.close()
+    print("dfsvsdfgsdfg")
 
 store()
