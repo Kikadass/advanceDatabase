@@ -316,6 +316,17 @@ def addThief(doc, thiefs):
     text = doc.createTextNode(check)
     description.appendChild(text)
 
+def addRule(doc, rules):
+    print("Describe the rule the criminals requested?")
+    check = raw_input()
+    while check == "":
+        print("Describe the rule the criminals requested?")
+        check = raw_input()
+    rule = doc.createElement("Rule")
+    rules.appendChild(rule)
+    text = doc.createTextNode(check)
+    rule.appendChild(text)
+
 def theft(doc, crime):
     #Victims
     addVictimsNode(doc, crime)
@@ -376,7 +387,6 @@ def theft(doc, crime):
     for i in range(0, x, 1):
          addThief(doc, thiefs)
 
-
 def hostageTaking(doc, crime):
 
     #Hostages
@@ -396,6 +406,7 @@ def hostageTaking(doc, crime):
     for i in range(0, x, 1):
          addPerson(doc, hostages)
 
+
     #Victims
     addVictimsNode(doc, crime)
 
@@ -403,11 +414,33 @@ def hostageTaking(doc, crime):
     #Evidence
     addEvidenceNode(doc, crime)
 
-    #location
 
     #ransom
+    print("Describe the ransom the criminals requested?")
+    check = raw_input()
+    if (check == ""):
+        check = "NULL"
+    ransom = doc.createElement("Ransom")
+    crime.appendChild(ransom)
+    text = doc.createTextNode(check)
+    ransom.appendChild(text)
+
 
     #rules negotiated
+    rules = doc.createElement("Rules")
+    crime.appendChild(rules)
+    x = int()
+    while not x:
+        try:
+            print("How many rules did the criminals request?")
+            x = int(raw_input())
+            if x == 0:
+                x = -1
+        except ValueError:
+            print 'Invalid Number'
+
+    for i in range(0, x, 1):
+         addRule(doc, rules)
 
 
 def cyberCrime(doc, crime):
