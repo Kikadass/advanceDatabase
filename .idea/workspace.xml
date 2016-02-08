@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="daf9306c-7d90-4ec7-8ad7-8cc780e39547" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Crime.py" afterPath="$PROJECT_DIR$/src/Crime.py" />
     </list>
     <ignored path="advanceDatabase.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -433,7 +432,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454947522890</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="all store implented">
+      <created>1454968560886</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1454968560886</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -468,7 +473,8 @@
     <MESSAGE value="print hello&#10;" />
     <MESSAGE value="cyber crime a bit extended" />
     <MESSAGE value="IP check complete only IPv4" />
-    <option name="LAST_COMMIT_MESSAGE" value="IP check complete only IPv4" />
+    <MESSAGE value="all store implented" />
+    <option name="LAST_COMMIT_MESSAGE" value="all store implented" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
