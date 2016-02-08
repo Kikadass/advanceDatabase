@@ -328,6 +328,14 @@ def addRule(doc, rules):
     rule.appendChild(text)
 
 def theft(doc, crime):
+
+    #crime type
+    crimeType = doc.createElement("Type")
+    crime.appendChild(crimeType)
+    text = doc.createTextNode("Theft")
+    crimeType.appendChild(text)
+
+
     #Victims
     addVictimsNode(doc, crime)
 
@@ -389,6 +397,12 @@ def theft(doc, crime):
 
 def hostageTaking(doc, crime):
 
+    #Crime type
+    crimeType = doc.createElement("Type")
+    crime.appendChild(crimeType)
+    text = doc.createTextNode("Hostagetaking")
+    crimeType.appendChild(text)
+
     #Hostages
     hostages = doc.createElement("Hostages")
     crime.appendChild(hostages)
@@ -444,11 +458,56 @@ def hostageTaking(doc, crime):
 
 
 def cyberCrime(doc, crime):
+    #Crime type
+    crimeType = doc.createElement("Type")
+    crime.appendChild(crimeType)
+    text = doc.createTextNode("Cyber crime")
+    crimeType.appendChild(text)
+
     #citizen complaint
+    citizenComplaint = doc.createElement("Complaint")
+    crime.appendChild(citizenComplaint)
+
+
+    print("Are there details of the citizen that made the complaint?")
+    check = raw_input()
+    while check == "":
+        print ("Invalid input")
+        check = raw_input()
+
+    if (check[0] == 'y' or check[0] == 'Y'):
+        citizen = doc.createElement("Citizen")
+        citizenComplaint.appendChild(citizen)
+        print("Please enter the details of that citizen")
+        addPerson(doc, citizen)
+
+    #description of the complaint
+    print("Please enter a description of the complaint")
+    check = raw_input()
+    if (check == ""):
+        check = "NULL"
+    description = doc.createElement("Description")
+    citizenComplaint.appendChild(description)
+    text = doc.createTextNode(check)
+    description.appendChild(text)
+
+
     #IP
+
+    print("Please enter the criminal IP")
+    check = raw_input()
+    while check == "" and (check.len() != 39 or check.len() != 15):
+        print ("Invalid input")
+        check = raw_input()
+
+    ip = doc.createElement("IP")
+    crime.appendChild(ip)
+    text = doc.createTextNode(check)
+    ip.appendChild(text)
+
+
     #ISP
-    #suspect
-    addPerson(doc, crime)
+
     #evidence
         # HDD
             # OS
@@ -483,6 +542,25 @@ def store():
     text = doc.createTextNode(check)
     addressOfCrimeScene.appendChild(text)
 
+    #Suspects
+    suspects = doc.createElement("Suspects")
+    crime.appendChild(suspects)
+
+    x = int()
+    while not x:
+        try:
+            print("How many suspects are there?")
+            x = int(raw_input())
+            if x == 0:
+                x = -1
+        except ValueError:
+            print 'Invalid Number'
+
+    for i in range(0, x, 1):
+        print("Please enter the details of the suspect number " + str(x))
+        suspect = doc.createElement("Suspect" + str(x))
+        suspects.appendChild(suspect)
+        addPerson(doc, suspect)
 
     #Format doc
     doc = format(doc)
