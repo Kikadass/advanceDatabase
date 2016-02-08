@@ -42,8 +42,8 @@
       <file leaf-file-name="Crime.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Crime.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7300532">
-              <caret line="522" column="0" selection-start-line="522" selection-start-column="0" selection-end-line="522" selection-end-column="0" />
+            <state vertical-scroll-proportion="1.1010638">
+              <caret line="658" column="33" selection-start-line="658" selection-start-column="33" selection-end-line="658" selection-end-column="33" />
               <folding>
                 <element signature="e#68#106#0" expanded="false" />
                 <element signature="e#125#656#0" expanded="false" />
@@ -51,13 +51,11 @@
                 <element signature="e#2199#3534#0" expanded="false" />
                 <element signature="e#3573#3953#0" expanded="false" />
                 <element signature="e#3990#4377#0" expanded="false" />
-                <element signature="e#4416#5478#0" expanded="false" />
                 <element signature="e#5518#5901#0" expanded="false" />
-                <element signature="e#5944#7120#0" expanded="false" />
                 <element signature="e#7154#8205#0" expanded="false" />
                 <element signature="e#8236#8551#0" expanded="false" />
-                <element signature="e#8581#10016#0" expanded="false" />
-                <element signature="e#10054#11382#0" expanded="false" />
+                <element signature="e#10886#12321#0" expanded="false" />
+                <element signature="e#12359#13687#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -66,7 +64,7 @@
       <file leaf-file-name="crime.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/XML/crime.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.65384614">
+            <state vertical-scroll-proportion="-0.3207547">
               <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
@@ -429,7 +427,13 @@
       <option name="project" value="LOCAL" />
       <updated>1454941143696</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="IP check complete only IPv4">
+      <created>1454947522890</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1454947522890</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -463,10 +467,13 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="print hello&#10;" />
     <MESSAGE value="cyber crime a bit extended" />
-    <option name="LAST_COMMIT_MESSAGE" value="cyber crime a bit extended" />
+    <MESSAGE value="IP check complete only IPv4" />
+    <option name="LAST_COMMIT_MESSAGE" value="IP check complete only IPv4" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -489,13 +496,11 @@
             <element signature="e#2199#3534#0" expanded="false" />
             <element signature="e#3573#3953#0" expanded="false" />
             <element signature="e#3990#4377#0" expanded="false" />
-            <element signature="e#4416#5478#0" expanded="false" />
             <element signature="e#5518#5901#0" expanded="false" />
-            <element signature="e#5944#7120#0" expanded="false" />
             <element signature="e#7154#8205#0" expanded="false" />
             <element signature="e#8236#8551#0" expanded="false" />
-            <element signature="e#8581#10016#0" expanded="false" />
-            <element signature="e#10054#11382#0" expanded="false" />
+            <element signature="e#10886#12321#0" expanded="false" />
+            <element signature="e#12359#13687#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -527,13 +532,11 @@
             <element signature="e#2199#3534#0" expanded="false" />
             <element signature="e#3573#3953#0" expanded="false" />
             <element signature="e#3990#4377#0" expanded="false" />
-            <element signature="e#4416#5478#0" expanded="false" />
             <element signature="e#5518#5901#0" expanded="false" />
-            <element signature="e#5944#7120#0" expanded="false" />
             <element signature="e#7154#8205#0" expanded="false" />
             <element signature="e#8236#8551#0" expanded="false" />
-            <element signature="e#8581#10016#0" expanded="false" />
-            <element signature="e#10054#11382#0" expanded="false" />
+            <element signature="e#10886#12321#0" expanded="false" />
+            <element signature="e#12359#13687#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -548,7 +551,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/XML/crime.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.65384614">
+        <state vertical-scroll-proportion="-0.3207547">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
@@ -556,8 +559,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Crime.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7300532">
-          <caret line="522" column="0" selection-start-line="522" selection-start-column="0" selection-end-line="522" selection-end-column="0" />
+        <state vertical-scroll-proportion="1.1010638">
+          <caret line="658" column="33" selection-start-line="658" selection-start-column="33" selection-end-line="658" selection-end-column="33" />
           <folding>
             <element signature="e#68#106#0" expanded="false" />
             <element signature="e#125#656#0" expanded="false" />
@@ -565,13 +568,11 @@
             <element signature="e#2199#3534#0" expanded="false" />
             <element signature="e#3573#3953#0" expanded="false" />
             <element signature="e#3990#4377#0" expanded="false" />
-            <element signature="e#4416#5478#0" expanded="false" />
             <element signature="e#5518#5901#0" expanded="false" />
-            <element signature="e#5944#7120#0" expanded="false" />
             <element signature="e#7154#8205#0" expanded="false" />
             <element signature="e#8236#8551#0" expanded="false" />
-            <element signature="e#8581#10016#0" expanded="false" />
-            <element signature="e#10054#11382#0" expanded="false" />
+            <element signature="e#10886#12321#0" expanded="false" />
+            <element signature="e#12359#13687#0" expanded="false" />
           </folding>
         </state>
       </provider>

@@ -328,6 +328,91 @@ def addRule(doc, rules):
     text = doc.createTextNode(check)
     rule.appendChild(text)
 
+def addHardDrive(doc, hardDrives):
+    print("Is it an SSD or a HDD?")
+    check = raw_input()
+    while check != "SSD" or check != "HDD":
+        print ("Invalid input")
+        check = raw_input()
+
+    hardDrive = doc.createElement(check)
+    hardDrives.appendChild(hardDrive)
+
+    #Owner
+    print("Is there an owner for this hard drive?")
+    check = raw_input()
+    while check == "":
+        print ("Invalid input")
+        check = raw_input()
+
+    if (check[0] == 'y' or check[0] == 'Y'):
+        owner = doc.createElement("Owner")
+        hardDrive.appendChild(owner)
+        addPerson(doc, owner)
+
+
+    #ID
+    id = doc.createElement("ID")
+    hardDrive.appendChild(id)
+    x = int()
+    while not x:
+        try:
+            print("Please enter an ID for this hard drive")
+            x = int(raw_input())
+        except ValueError:
+            print 'Invalid Number'
+
+    text = doc.createTextNode(str(x))
+    id.appendChild(text)
+
+
+    #Storage
+    x = int()
+    while not x:
+        try:
+            print("Please enter the storage of this hard drivein GigaBytes. (eg. 1024 = 1TB)")
+            x = int(raw_input())
+        except ValueError:
+            print 'Invalid Number'
+    storage = doc.createElement("Storage")
+    hardDrive.appendChild(storage)
+    text = doc.createTextNode(str(x))
+    storage.appendChild(text)
+
+
+    #OS
+    print("Please enter the Operating system that the hard drive works on")
+    check = raw_input()
+    if (check == ""):
+        check = "NULL"
+    os = doc.createElement("OS")
+    hardDrive.appendChild(os)
+    text = doc.createTextNode(check)
+    os.appendChild(text)
+
+
+    #type of evidence trying to find
+    print("Please enter the type of File that has to be found on this hard drive. (eg. video, text, images...)")
+    check = raw_input()
+    if (check == ""):
+        check = "NULL"
+    typeOfFile = doc.createElement("TypeOfFile")
+    hardDrive.appendChild(typeOfFile)
+    text = doc.createTextNode(check)
+    typeOfFile.appendChild(text)
+
+
+    #Description
+    print("Please enter a description for the hard drive")
+    check = raw_input()
+    if (check == ""):
+        check = "NULL"
+    description = doc.createElement("Description")
+    hardDrive.appendChild(description)
+    text = doc.createTextNode(check)
+    description.appendChild(text)
+
+
 def theft(doc, crime):
 
     #crime type
@@ -523,13 +608,33 @@ def cyberCrime(doc, crime):
 
 
     #ISP
+    print("What is the ISP of the criminal?")
+    check = raw_input()
+    if (check == ""):
+        check = "NULL"
+    isp = doc.createElement("ISP")
+    crime.appendChild(isp)
+    text = doc.createTextNode(check)
+    isp.appendChild(text)
+
+    #HardDrives
+    hardDrives = doc.createElement("HardDrives")
+    crime.appendChild(hardDrives)
+
+    x = int()
+    while not x:
+        try:
+            print("How many conficated hardDrives are there?")
+            x = int(raw_input())
+            if x == 0:
+                x = -1
+        except ValueError:
+            print 'Invalid Number'
+
+    for i in range(0, x, 1):
+        addHardDrive(doc, hardDrives)
 
 
-    #evidence
-        # HDD
-            # OS
-            #size
-        #type of evidence trying to find
 
 def store():
     doc = Document()
@@ -537,16 +642,25 @@ def store():
     crime = doc.createElement("Crime")
     doc.appendChild(crime)
 
-    #Theft
-    #theft(doc, crime)
+    print("Is it an theft, a cybercrime or a hostagetaking? (Please write it in lower case)")
+    check = raw_input()
+    while check != "theft" or check != "cybercrime" or check != "hostagetaking":
+        print ("Invalid input")
+        check = raw_input()
 
+
+
+    #Theft
+    if check == "theft":
+        theft(doc, crime)
 
     #Hostage taking
-    #hostageTaking(doc, crime)
-
+    elif check == "hostagetaking":
+        hostageTaking(doc, crime)
 
     #Cybercrime
-    cyberCrime(doc, crime)
+    elif check == "cybercrime":
+        cyberCrime(doc, crime)
 
 
     #Crime Scene address
