@@ -1,4 +1,5 @@
 from xml.dom.minidom import *
+import socket
 
 
 
@@ -493,12 +494,27 @@ def cyberCrime(doc, crime):
 
 
     #IP
-
-    print("Please enter the criminal IP")
-    check = raw_input()
-    while check == "" and (check.len() != 39 or check.len() != 15):
-        print ("Invalid input")
+    check = ""
+    while check == "":
+        print("Please enter the criminal IP")
         check = raw_input()
+
+        try:
+            socket.inet_pton(socket.AF_INET, check)
+        except AttributeError:  # no inet_pton here, sorry
+            try:
+                socket.inet_aton(check)
+            except socket.error:
+                print("Invalid input")
+                check = ""
+                continue
+            if (check.count('.') != 3):
+                print("Invalid input: the IP must have 3 dots")
+                check = ""
+        except socket.error:  # not a valid address
+            print("Invalid input")
+            check = ""
+
 
     ip = doc.createElement("IP")
     crime.appendChild(ip)
@@ -507,6 +523,7 @@ def cyberCrime(doc, crime):
 
 
     #ISP
+
 
     #evidence
         # HDD
@@ -521,7 +538,7 @@ def store():
     doc.appendChild(crime)
 
     #Theft
-    theft(doc, crime)
+    #theft(doc, crime)
 
 
     #Hostage taking
@@ -529,7 +546,7 @@ def store():
 
 
     #Cybercrime
-
+    cyberCrime(doc, crime)
 
 
     #Crime Scene address
