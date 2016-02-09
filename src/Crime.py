@@ -32,6 +32,29 @@ def tryIt():
     out.flush()
     out.close()
 
+def isIntNotNull(x):
+    while not x:
+        try:
+            x = int(raw_input())
+            if x == 0:
+                x = -1
+        except ValueError:
+            print 'Invalid Number'
+
+    return x
+
+def isInt(x):
+    while not x:
+        try:
+            check = raw_input()
+            if (check == ""):
+                x = -1
+            else: x = int(check)
+        except ValueError:
+            print 'Invalid Number'
+
+    return x
+
 def addPerson(doc, parent):
 
     print("What is his/her name?")
@@ -47,17 +70,9 @@ def addPerson(doc, parent):
 
     age = doc.createElement("Age")
     parent.appendChild(age)
+    print("How old is he/she?")
     x = int()
-    while not x:
-        try:
-            print("How old is he/she?")
-            check = raw_input()
-            if (check == ""):
-                check = "NULL"
-                x = -1
-            else: x = int(check)
-        except ValueError:
-            print 'Invalid Number'
+    x = isInt(x)
 
     text = doc.createTextNode(str(x))
     age.appendChild(text)
@@ -143,19 +158,13 @@ def addVictims(doc, victims):
 
 
 def addVictimsNode(doc, crime):
-    #Victims
+    # Victims
     victims = doc.createElement("Victims")
     crime.appendChild(victims)
 
+    print("How many victims are there?")
     x = int()
-    while not x:
-        try:
-            print("How many victims are there?")
-            x = int(raw_input())
-            if x == 0:
-                x = -1
-        except ValueError:
-            print 'Invalid Number'
+    x = isIntNotNull(x)
 
     for i in range(0, x, 1):
         addVictims(doc, victims)
@@ -195,13 +204,9 @@ def addEvidence(doc, evidence):
 
     id = doc.createElement("ID")
     pieceOfevidence.appendChild(id)
+    print("Please enter an ID for this piece of evidence")
     x = int()
-    while not x:
-        try:
-            print("Please enter an ID for this piece of evidence")
-            x = int(raw_input())
-        except ValueError:
-            print 'Invalid Number'
+    x = isIntNotNull(x)
 
     text = doc.createTextNode(str(x))
     id.appendChild(text)
@@ -219,16 +224,9 @@ def addEvidence(doc, evidence):
 def addEvidenceNode(doc, crime):
     evidence = doc.createElement("Evidence")
     crime.appendChild(evidence)
-
+    print("How many pieces of evidence are there?")
     x = int()
-    while not x:
-        try:
-            print("How many pieces of evidence are there?")
-            x = int(raw_input())
-            if x == 0:
-                x = -1
-        except ValueError:
-            print 'Invalid Number'
+    x = isIntNotNull(x)
 
     for i in range(0, x, 1):
         addEvidence(doc, evidence)
@@ -244,26 +242,18 @@ def addItemStolen(doc, itemsStolen):
 
     id = doc.createElement("ID")
     item.appendChild(id)
+    print("Please enter an ID for this stolen item")
     x = int()
-    while not x:
-        try:
-            print("Please enter an ID for this stolen item")
-            x = int(raw_input())
-        except ValueError:
-            print 'Invalid Number'
+    x = isIntNotNull(x)
 
     text = doc.createTextNode(str(x))
     id.appendChild(text)
 
     value = doc.createElement("Value")
     item.appendChild(value)
+    print("Please enter an economic value for this stolen item in GBP")
     x = int()
-    while not x:
-        try:
-            print("Please enter an economic value for this stolen item in GBP")
-            x = int(raw_input())
-        except ValueError:
-            print 'Invalid Number'
+    x = isIntNotNull(x)
 
     text = doc.createTextNode(str(x))
     value.appendChild(text)
@@ -338,7 +328,7 @@ def addHardDrive(doc, hardDrives):
     hardDrive = doc.createElement(check)
     hardDrives.appendChild(hardDrive)
 
-    #Owner
+    # Owner
     print("Is there an owner for this hard drive?")
     check = raw_input()
     while check == "":
@@ -351,36 +341,28 @@ def addHardDrive(doc, hardDrives):
         addPerson(doc, owner)
 
 
-    #ID
+    # ID
     id = doc.createElement("ID")
     hardDrive.appendChild(id)
+    print("Please enter an ID for this hard drive")
     x = int()
-    while not x:
-        try:
-            print("Please enter an ID for this hard drive")
-            x = int(raw_input())
-        except ValueError:
-            print 'Invalid Number'
+    x = isIntNotNull(x)
 
     text = doc.createTextNode(str(x))
     id.appendChild(text)
 
 
-    #Storage
+    # Storage
+    print("Please enter the storage of this hard drivein GigaBytes. (eg. 1024 = 1TB)")
     x = int()
-    while not x:
-        try:
-            print("Please enter the storage of this hard drivein GigaBytes. (eg. 1024 = 1TB)")
-            x = int(raw_input())
-        except ValueError:
-            print 'Invalid Number'
+    x = isIntNotNull(x)
     storage = doc.createElement("Storage")
     hardDrive.appendChild(storage)
     text = doc.createTextNode(str(x))
     storage.appendChild(text)
 
 
-    #OS
+    # OS
     print("Please enter the Operating system that the hard drive works on")
     check = raw_input()
     if (check == ""):
@@ -391,7 +373,7 @@ def addHardDrive(doc, hardDrives):
     os.appendChild(text)
 
 
-    #type of evidence trying to find
+    # type of evidence trying to find
     print("Please enter the type of File that has to be found on this hard drive. (eg. video, text, images...)")
     check = raw_input()
     if (check == ""):
@@ -402,7 +384,7 @@ def addHardDrive(doc, hardDrives):
     typeOfFile.appendChild(text)
 
 
-    #Description
+    # Description
     print("Please enter a description for the hard drive")
     check = raw_input()
     if (check == ""):
@@ -415,107 +397,83 @@ def addHardDrive(doc, hardDrives):
 
 def theft(doc, crime):
 
-    #crime type
+    # crime type
     crimeType = doc.createElement("Type")
     crime.appendChild(crimeType)
     text = doc.createTextNode("Theft")
     crimeType.appendChild(text)
 
 
-    #Victims
+    # Victims
     addVictimsNode(doc, crime)
 
 
-    #Witness
+    # Witness
     witness = doc.createElement("Witness")
     crime.appendChild(witness)
 
+    print("How many witnesses are there?")
     x = int()
-    while not x:
-        try:
-            print("How many witnesses are there?")
-            x = int(raw_input())
-            if x == 0:
-                x = -1
-        except ValueError:
-            print 'Invalid Number'
+    x = isIntNotNull(x)
 
     for i in range(0, x, 1):
         addWitness(doc, witness)
 
 
-    #Evidence
+    # Evidence
     addEvidenceNode(doc, crime)
 
 
-    #Stolen Items
+    # Stolen Items
     itemsStolen = doc.createElement("ItemsStolen")
     crime.appendChild(itemsStolen)
+    print("How many stolen items are there?")
     x = int()
-    while not x:
-        try:
-            print("How many stolen items are there?")
-            x = int(raw_input())
-            if x == 0:
-                x = -1
-        except ValueError:
-            print 'Invalid Number'
+    x = isIntNotNull(x)
 
     for i in range(0, x, 1):
          addItemStolen(doc, itemsStolen)
 
 
-    #Thiefs
+    # Thiefs
     thiefs = doc.createElement("Thiefs")
     crime.appendChild(thiefs)
+    print("How many thiefs are there?")
     x = int()
-    while not x:
-        try:
-            print("How many thiefs are there?")
-            x = int(raw_input())
-            if x == 0:
-                x = -1
-        except ValueError:
-            print 'Invalid Number'
+    x = isIntNotNull(x)
 
     for i in range(0, x, 1):
          addThief(doc, thiefs)
 
 def hostageTaking(doc, crime):
 
-    #Crime type
+    # Crime type
     crimeType = doc.createElement("Type")
     crime.appendChild(crimeType)
     text = doc.createTextNode("Hostagetaking")
     crimeType.appendChild(text)
 
-    #Hostages
+    # Hostages
     hostages = doc.createElement("Hostages")
     crime.appendChild(hostages)
 
+    print("How many hostages are there?")
     x = int()
-    while not x:
-        try:
-            print("How many hostages are there?")
-            x = int(raw_input())
-            if x == 0:
-                x = -1
-        except ValueError:
-            print 'Invalid Number'
+    x = isIntNotNull(x)
 
     for i in range(0, x, 1):
          addPerson(doc, hostages)
 
 
-    #Victims
+    # Victims
     addVictimsNode(doc, crime)
 
 
-    #Evidence
+    # Evidence
     addEvidenceNode(doc, crime)
 
 
-    #ransom
+    # ransom
     print("Describe the ransom the criminals requested?")
     check = raw_input()
     if (check == ""):
@@ -526,31 +484,24 @@ def hostageTaking(doc, crime):
     ransom.appendChild(text)
 
 
-    #rules negotiated
+    # rules negotiated
     rules = doc.createElement("Rules")
     crime.appendChild(rules)
+    print("How many rules did the criminals request?")
     x = int()
-    while not x:
-        try:
-            print("How many rules did the criminals request?")
-            x = int(raw_input())
-            if x == 0:
-                x = -1
-        except ValueError:
-            print 'Invalid Number'
+    x = isIntNotNull(x)
 
     for i in range(0, x, 1):
          addRule(doc, rules)
 
-
 def cyberCrime(doc, crime):
-    #Crime type
+    # Crime type
     crimeType = doc.createElement("Type")
     crime.appendChild(crimeType)
     text = doc.createTextNode("Cyber crime")
     crimeType.appendChild(text)
 
-    #citizen complaint
+    # citizen complaint
     citizenComplaint = doc.createElement("Complaint")
     crime.appendChild(citizenComplaint)
 
@@ -567,7 +518,7 @@ def cyberCrime(doc, crime):
         print("Please enter the details of that citizen")
         addPerson(doc, citizen)
 
-    #description of the complaint
+    # description of the complaint
     print("Please enter a description of the complaint")
     check = raw_input()
     if (check == ""):
@@ -578,7 +529,7 @@ def cyberCrime(doc, crime):
     description.appendChild(text)
 
 
-    #IP
+    # IP
     check = ""
     while check == "":
         print("Please enter the criminal IP")
@@ -607,7 +558,7 @@ def cyberCrime(doc, crime):
     ip.appendChild(text)
 
 
-    #ISP
+    # ISP
     print("What is the ISP of the criminal?")
     check = raw_input()
     if (check == ""):
@@ -617,24 +568,16 @@ def cyberCrime(doc, crime):
     text = doc.createTextNode(check)
     isp.appendChild(text)
 
-    #HardDrives
+    # HardDrives
     hardDrives = doc.createElement("HardDrives")
     crime.appendChild(hardDrives)
 
+    print("How many conficated hardDrives are there?")
     x = int()
-    while not x:
-        try:
-            print("How many conficated hardDrives are there?")
-            x = int(raw_input())
-            if x == 0:
-                x = -1
-        except ValueError:
-            print 'Invalid Number'
+    x = isIntNotNull(x)
 
     for i in range(0, x, 1):
         addHardDrive(doc, hardDrives)
-
-
 
 def store():
     doc = Document()
@@ -644,26 +587,26 @@ def store():
 
     print("Is it an theft, a cybercrime or a hostagetaking? (Please write it in lower case)")
     check = raw_input()
-    while check != "theft" or check != "cybercrime" or check != "hostagetaking":
+    while check != "theft" and check != "cybercrime" and check != "hostagetaking":
         print ("Invalid input")
         check = raw_input()
 
 
 
-    #Theft
+    # Theft
     if check == "theft":
         theft(doc, crime)
 
-    #Hostage taking
+    # Hostage taking
     elif check == "hostagetaking":
         hostageTaking(doc, crime)
 
-    #Cybercrime
+    # Cybercrime
     elif check == "cybercrime":
         cyberCrime(doc, crime)
 
 
-    #Crime Scene address
+    # Crime Scene address
     print("What is the address of the crime scene?")
     check = raw_input()
     if (check == ""):
@@ -673,19 +616,13 @@ def store():
     text = doc.createTextNode(check)
     addressOfCrimeScene.appendChild(text)
 
-    #Suspects
+    # Suspects
     suspects = doc.createElement("Suspects")
     crime.appendChild(suspects)
 
+    print("How many suspects are there?")
     x = int()
-    while not x:
-        try:
-            print("How many suspects are there?")
-            x = int(raw_input())
-            if x == 0:
-                x = -1
-        except ValueError:
-            print 'Invalid Number'
+    x = isIntNotNull(x)
 
     for i in range(0, x, 1):
         print("Please enter the details of the suspect number " + str(x))
@@ -693,10 +630,10 @@ def store():
         suspects.appendChild(suspect)
         addPerson(doc, suspect)
 
-    #Format doc
+    # Format doc
     doc = format(doc)
 
-    #write xml file
+    # write xml file
     out = open("../XML/crime.xml", 'w')
     doc.writexml(out)
     out.flush()
