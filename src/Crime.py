@@ -2,9 +2,9 @@ from xml.dom.minidom import *
 import socket
 
 
-
 def format(doc):
-    return  parseString(doc.toprettyxml())
+    return parseString(doc.toprettyxml())
+
 
 def tryIt():
     doc = Document()
@@ -32,6 +32,7 @@ def tryIt():
     out.flush()
     out.close()
 
+
 def isIntNotNull(x):
     while not x:
         try:
@@ -43,11 +44,12 @@ def isIntNotNull(x):
 
     return x
 
+
 def isInt(x):
     while not x:
         try:
             check = raw_input()
-            if (check == ""):
+            if check == "":
                 x = -1
             else: x = int(check)
         except ValueError:
@@ -55,12 +57,13 @@ def isInt(x):
 
     return x
 
+
 def addPerson(doc, parent):
 
     print("What is his/her name?")
 
     check = raw_input()
-    if (check == ""):
+    if check == "":
         check = "NULL"
     name = doc.createElement("Name")
     parent.appendChild(name)
@@ -80,7 +83,7 @@ def addPerson(doc, parent):
 
     print("What is his/her address?")
     check = raw_input()
-    if (check == ""):
+    if check == "":
         check = "NULL"
     address = doc.createElement("Address")
     parent.appendChild(address)
@@ -95,12 +98,13 @@ def addPerson(doc, parent):
         try:
             print("What is his/her phone number?")
             check = raw_input()
-            if (check == ""):
+            if check == "":
                 check = "NULL"
                 x = -1
-            else: x = int(check)
+            else:
+                x = int(check)
 
-            if (x/10000000000000 > 0 or x/100000000 == 0):
+            if x/10000000000000 > 0 or x/100000000 == 0:
                 x = 0
                 print 'Invalid Number'
         except ValueError:
@@ -118,7 +122,7 @@ def addVictims(doc, victims):
 
     print("Current state of the victim? (eg. Dead/Injured...)")
     check = raw_input()
-    if (check == ""):
+    if check == "":
         check = "NULL"
     state = doc.createElement("CurrentState")
     victim.appendChild(state)
@@ -132,13 +136,13 @@ def addVictims(doc, victims):
         print ("Invalid input")
         check = raw_input()
 
-    if (check[0] == 'y' or check[0] == 'Y'):
+    if check[0] == 'y' or check[0] == 'Y':
         relatedPerson = doc.createElement("RelatedPerson")
         victim.appendChild(relatedPerson)
 
         print("What is the relationship with the victim?")
         check = raw_input()
-        if (check == ""):
+        if check == "":
             check = "NULL"
         relationship = doc.createElement("Relationship")
         relatedPerson.appendChild(relationship)
@@ -149,7 +153,7 @@ def addVictims(doc, victims):
 
     print("Please enter a description of the victim")
     check = raw_input()
-    if (check == ""):
+    if check == "":
         check = "NULL"
     description = doc.createElement("Description")
     victim.appendChild(description)
@@ -167,27 +171,29 @@ def addVictimsNode(doc, crime):
     x = isIntNotNull(x)
 
     for i in range(0, x, 1):
+        print ("Please enter the details of victim number " + str(i+1))
         addVictims(doc, victims)
+        doc.getElementsByTagName("Victim")[i].setAttribute("id" , str(i+1))
 
 
-def addWitness(doc, witness):
-    witnes = doc.createElement("Witness")
-    witness.appendChild(witnes)
+def addWitness(doc, witnesses):
+    witness = doc.createElement("Witness")
+    witnesses.appendChild(witness)
 
-    addPerson(doc, witnes)
+    addPerson(doc, witness)
 
     print("Please enter a description of what was witnessed")
     check = raw_input()
-    if (check == ""):
+    if check == "":
         check = "NULL"
     description = doc.createElement("Description")
-    witnes.appendChild(description)
+    witness.appendChild(description)
     text = doc.createTextNode(check)
     description.appendChild(text)
 
 
 def addEvidence(doc, evidence):
-    pieceOfevidence = doc.createElement("Evidence")
+    pieceOfevidence = doc.createElement("PieceOfEvidence")
     evidence.appendChild(pieceOfevidence)
 
     print("Is there an owner for this piece of evidence?")
@@ -196,24 +202,14 @@ def addEvidence(doc, evidence):
         print ("Invalid input")
         check = raw_input()
 
-    if (check[0] == 'y' or check[0] == 'Y'):
+    if check[0] == 'y' or check[0] == 'Y':
         owner = doc.createElement("Owner")
         pieceOfevidence.appendChild(owner)
         addPerson(doc, owner)
 
-
-    id = doc.createElement("ID")
-    pieceOfevidence.appendChild(id)
-    print("Please enter an ID for this piece of evidence")
-    x = int()
-    x = isIntNotNull(x)
-
-    text = doc.createTextNode(str(x))
-    id.appendChild(text)
-
     print("Please enter a description for the piece of evidence")
     check = raw_input()
-    if (check == ""):
+    if check == "":
         check = "NULL"
     description = doc.createElement("Description")
     pieceOfevidence.appendChild(description)
@@ -229,7 +225,10 @@ def addEvidenceNode(doc, crime):
     x = isIntNotNull(x)
 
     for i in range(0, x, 1):
+        print ("Please enter the details of piece of evidence number " + str(i+1))
         addEvidence(doc, evidence)
+        doc.getElementsByTagName("PieceOfEvidence")[i].setAttribute("id", str(i+1))
+
 
 def addItemStolen(doc, itemsStolen):
     item = doc.createElement("Item")
@@ -240,28 +239,19 @@ def addItemStolen(doc, itemsStolen):
     item.appendChild(owner)
     addPerson(doc, owner)
 
-    id = doc.createElement("ID")
-    item.appendChild(id)
-    print("Please enter an ID for this stolen item")
-    x = int()
-    x = isIntNotNull(x)
-
-    text = doc.createTextNode(str(x))
-    id.appendChild(text)
-
-    value = doc.createElement("Value")
-    item.appendChild(value)
+    economicValue = doc.createElement("EconomicValue")
+    item.appendChild(economicValue)
     print("Please enter an economic value for this stolen item in GBP")
     x = int()
     x = isIntNotNull(x)
 
     text = doc.createTextNode(str(x))
-    value.appendChild(text)
+    economicValue.appendChild(text)
 
 
     print("Please enter a description for this stolen item")
     check = raw_input()
-    if (check == ""):
+    if check == "":
         check = "NULL"
     description = doc.createElement("Description")
     item.appendChild(description)
@@ -282,13 +272,13 @@ def addThief(doc, thiefs):
         print ("Invalid input")
         check = raw_input()
 
-    if (check[0] == 'y' or check[0] == 'Y'):
+    if check[0] == 'y' or check[0] == 'Y':
         relatedPerson = doc.createElement("RelatedPerson")
         thief.appendChild(relatedPerson)
 
         print("What is the relationship with the thief?")
         check = raw_input()
-        if (check == ""):
+        if check == "":
             check = "NULL"
         relationship = doc.createElement("Relationship")
         relatedPerson.appendChild(relationship)
@@ -300,12 +290,13 @@ def addThief(doc, thiefs):
 
     print("Please enter a description of the thief")
     check = raw_input()
-    if (check == ""):
+    if check == "":
         check = "NULL"
     description = doc.createElement("Description")
     thief.appendChild(description)
     text = doc.createTextNode(check)
     description.appendChild(text)
+
 
 def addRule(doc, rules):
     print("Describe the rule the criminals requested?")
@@ -318,6 +309,7 @@ def addRule(doc, rules):
     text = doc.createTextNode(check)
     rule.appendChild(text)
 
+
 def addHardDrive(doc, hardDrives):
     print("Is it an SSD or a HDD?")
     check = raw_input()
@@ -328,6 +320,8 @@ def addHardDrive(doc, hardDrives):
     hardDrive = doc.createElement(check)
     hardDrives.appendChild(hardDrive)
 
+
+
     # Owner
     print("Is there an owner for this hard drive?")
     check = raw_input()
@@ -335,7 +329,7 @@ def addHardDrive(doc, hardDrives):
         print ("Invalid input")
         check = raw_input()
 
-    if (check[0] == 'y' or check[0] == 'Y'):
+    if check[0] == 'y' or check[0] == 'Y':
         owner = doc.createElement("Owner")
         hardDrive.appendChild(owner)
         addPerson(doc, owner)
@@ -387,7 +381,7 @@ def addHardDrive(doc, hardDrives):
     # Description
     print("Please enter a description for the hard drive")
     check = raw_input()
-    if (check == ""):
+    if check == "":
         check = "NULL"
     description = doc.createElement("Description")
     hardDrive.appendChild(description)
@@ -408,16 +402,18 @@ def theft(doc, crime):
     addVictimsNode(doc, crime)
 
 
-    # Witness
-    witness = doc.createElement("Witness")
-    crime.appendChild(witness)
+    # witnesses
+    witnesses = doc.createElement("Witnesses")
+    crime.appendChild(witnesses)
 
     print("How many witnesses are there?")
     x = int()
     x = isIntNotNull(x)
 
     for i in range(0, x, 1):
-        addWitness(doc, witness)
+        print ("Please enter the details of witness number " + str(i+1))
+        addWitness(doc, witnesses)
+        doc.getElementsByTagName("Witness")[i].setAttribute("id" , str(i+1))
 
 
     # Evidence
@@ -432,7 +428,9 @@ def theft(doc, crime):
     x = isIntNotNull(x)
 
     for i in range(0, x, 1):
-         addItemStolen(doc, itemsStolen)
+        print ("Please enter the details of item stolen number " + str(i+1))
+        addItemStolen(doc, itemsStolen)
+        doc.getElementsByTagName("Item")[i].setAttribute("id" , str(i+1))
 
 
     # Thiefs
@@ -443,7 +441,10 @@ def theft(doc, crime):
     x = isIntNotNull(x)
 
     for i in range(0, x, 1):
-         addThief(doc, thiefs)
+        print ("Please enter the details of thief number " + str(i+1))
+        addThief(doc, thiefs)
+        doc.getElementsByTagName("Thief")[i].setAttribute("id", str(i+1))
+
 
 def hostageTaking(doc, crime):
 
@@ -462,7 +463,11 @@ def hostageTaking(doc, crime):
     x = isIntNotNull(x)
 
     for i in range(0, x, 1):
-         addPerson(doc, hostages)
+        hostage = doc.createElement("Hostage")
+        hostages.appendChild(hostage)
+        print ("Please enter the details of hostage number " + str(i+1))
+        addPerson(doc, hostage)
+        doc.getElementsByTagName("Hostage")[i].setAttribute("id", str(i+1))
 
 
     # Victims
@@ -476,7 +481,7 @@ def hostageTaking(doc, crime):
     # ransom
     print("Describe the ransom the criminals requested?")
     check = raw_input()
-    if (check == ""):
+    if check == "":
         check = "NULL"
     ransom = doc.createElement("Ransom")
     crime.appendChild(ransom)
@@ -492,7 +497,10 @@ def hostageTaking(doc, crime):
     x = isIntNotNull(x)
 
     for i in range(0, x, 1):
-         addRule(doc, rules)
+        print ("Please enter the details of rule number " + str(i+1))
+        addRule(doc, rules)
+        doc.getElementsByTagName("Rule")[i].setAttribute("id", str(i+1))
+
 
 def cyberCrime(doc, crime):
     # Crime type
@@ -512,7 +520,7 @@ def cyberCrime(doc, crime):
         print ("Invalid input")
         check = raw_input()
 
-    if (check[0] == 'y' or check[0] == 'Y'):
+    if check[0] == 'y' or check[0] == 'Y':
         citizen = doc.createElement("Citizen")
         citizenComplaint.appendChild(citizen)
         print("Please enter the details of that citizen")
@@ -521,7 +529,7 @@ def cyberCrime(doc, crime):
     # description of the complaint
     print("Please enter a description of the complaint")
     check = raw_input()
-    if (check == ""):
+    if check == "":
         check = "NULL"
     description = doc.createElement("Description")
     citizenComplaint.appendChild(description)
@@ -544,7 +552,7 @@ def cyberCrime(doc, crime):
                 print("Invalid input")
                 check = ""
                 continue
-            if (check.count('.') != 3):
+            if check.count('.') != 3:
                 print("Invalid input: the IP must have 3 dots")
                 check = ""
         except socket.error:  # not a valid address
@@ -561,7 +569,7 @@ def cyberCrime(doc, crime):
     # ISP
     print("What is the ISP of the criminal?")
     check = raw_input()
-    if (check == ""):
+    if check == "":
         check = "NULL"
     isp = doc.createElement("ISP")
     crime.appendChild(isp)
@@ -577,7 +585,9 @@ def cyberCrime(doc, crime):
     x = isIntNotNull(x)
 
     for i in range(0, x, 1):
+        print ("Please enter the details of hard drive number " + str(i+1))
         addHardDrive(doc, hardDrives)
+
 
 def store():
     doc = Document()
@@ -609,7 +619,7 @@ def store():
     # Crime Scene address
     print("What is the address of the crime scene?")
     check = raw_input()
-    if (check == ""):
+    if check == "":
         check = "NULL"
     addressOfCrimeScene = doc.createElement("addressOfCrimeScene")
     crime.appendChild(addressOfCrimeScene)
@@ -626,9 +636,10 @@ def store():
 
     for i in range(0, x, 1):
         print("Please enter the details of the suspect number " + str(x))
-        suspect = doc.createElement("Suspect" + str(x))
+        suspect = doc.createElement("Suspect")
         suspects.appendChild(suspect)
         addPerson(doc, suspect)
+        doc.getElementsByTagName("Suspect")[i].setAttribute("id", str(i+1))
 
     # Format doc
     doc = format(doc)
