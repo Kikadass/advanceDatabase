@@ -6,8 +6,9 @@ class MovieHandler( xml.sax.ContentHandler ):
     def __init__(self):
         self.currentData = ""
         self.array = ["Crime", "Type", "Name", "Age", "Address", "Phone", "CurrentState", "Description", "EconomicValue", "Relationship", "IP", "ISP", "Storage", "OS", "TypeOfFile"]
-        self.arrayOfContents = [""]*(len(self.array)-1)
-        self.addressOfCrimeScene = ""
+        self.arrayOfContents1 = [""] * (len(self.array) - 1)
+        self.array2 = ["addressOfCrimeScene", "Ransom", "Rule"]
+        self.arrayOfContents2 = [""] * (len(self.array2))
 
     def unknown(self, string):
         if not string or string == "-1" or string == "NULL":
@@ -30,24 +31,27 @@ class MovieHandler( xml.sax.ContentHandler ):
             id = attributes["id"]
             print "*" + tag + " " + id + "*"
 
+
     # Call when an elements ends
     def endElement(self, tag):
         if self.currentData == "Type":
-            print "*****", self.unknown(self.arrayOfContents[0]), "******"
-        elif self.currentData == "addressOfCrimeScene":
-            print self.unknown(self.addressOfCrimeScene)
+            print "*****", self.unknown(self.arrayOfContents1[0]), "******"
+        for i in range(0,len(self.array2)):
+            if self.currentData == self.array2[i]:
+                print self.unknown(self.arrayOfContents2[i])
         for i in range(0,len(self.array)):
             if self.currentData == self.array[i] and self.currentData != "Type":
-                print self.array[i] + ": " + self.unknown(self.arrayOfContents[i-1])
+                print self.array[i] + ": " + self.unknown(self.arrayOfContents1[i - 1])
         self.currentData = ""
 
     # Call when a character is read
     def characters(self, content):
-        if self.currentData == "addressOfCrimeScene":
-                self.addressOfCrimeScene = content
+        for i in range(0, len(self.array2)):
+            if self.currentData == self.array2[i]:
+                self.arrayOfContents2[i] = content
         for i in range(1, len(self.array)):
             if self.currentData == self.array[i]:
-                self.arrayOfContents[i-1] = content
+                self.arrayOfContents1[i - 1] = content
 
 
 if  __name__ == "__main__":
