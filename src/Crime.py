@@ -313,12 +313,14 @@ def addRule(doc, rules):
 def addHardDrive(doc, hardDrives):
     print("Is it an SSD or a HDD?")
     check = raw_input()
-    while check != "SSD" or check != "HDD":
+    while check != "SSD" and check != "HDD":
         print ("Invalid input")
         check = raw_input()
 
     hardDrive = doc.createElement(check)
     hardDrives.appendChild(hardDrive)
+
+
 
 
 
@@ -336,14 +338,14 @@ def addHardDrive(doc, hardDrives):
 
 
     # ID
-    id = doc.createElement("ID")
-    hardDrive.appendChild(id)
-    print("Please enter an ID for this hard drive")
-    x = int()
-    x = isIntNotNull(x)
-
-    text = doc.createTextNode(str(x))
-    id.appendChild(text)
+    # id = doc.createElement("ID")
+    # hardDrive.appendChild(id)
+    # print("Please enter an ID for this hard drive")
+    # x = int()
+    # x = isIntNotNull(x)
+    #
+    # text = doc.createTextNode(str(x))
+    # id.appendChild(text)
 
 
     # Storage
@@ -580,13 +582,15 @@ def cyberCrime(doc, crime):
     hardDrives = doc.createElement("HardDrives")
     crime.appendChild(hardDrives)
 
-    print("How many conficated hardDrives are there?")
+    print("How many confiscated hardDrives are there?")
     x = int()
     x = isIntNotNull(x)
 
     for i in range(0, x, 1):
         print ("Please enter the details of hard drive number " + str(i+1))
         addHardDrive(doc, hardDrives)
+        hardDrives.childNodes[i].setAttribute("id", str(i+1))
+
 
 
 def store():
@@ -615,17 +619,6 @@ def store():
     elif check == "cybercrime":
         cyberCrime(doc, crime)
 
-
-    # Crime Scene address
-    print("What is the address of the crime scene?")
-    check = raw_input()
-    if check == "":
-        check = "NULL"
-    addressOfCrimeScene = doc.createElement("addressOfCrimeScene")
-    crime.appendChild(addressOfCrimeScene)
-    text = doc.createTextNode(check)
-    addressOfCrimeScene.appendChild(text)
-
     # Suspects
     suspects = doc.createElement("Suspects")
     crime.appendChild(suspects)
@@ -640,6 +633,16 @@ def store():
         suspects.appendChild(suspect)
         addPerson(doc, suspect)
         doc.getElementsByTagName("Suspect")[i].setAttribute("id", str(i+1))
+
+    # Crime Scene address
+    print("What is the address of the crime scene?")
+    check = raw_input()
+    if check == "":
+        check = "NULL"
+    addressOfCrimeScene = doc.createElement("addressOfCrimeScene")
+    crime.appendChild(addressOfCrimeScene)
+    text = doc.createTextNode(check)
+    addressOfCrimeScene.appendChild(text)
 
     # Format doc
     doc = format(doc)
