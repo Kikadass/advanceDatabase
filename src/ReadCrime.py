@@ -2,7 +2,7 @@
 
 import xml.sax
 
-class MovieHandler( xml.sax.ContentHandler ):
+class Handler( xml.sax.ContentHandler ):
     def __init__(self):
         self.currentData = ""
         self.array = ["Crime", "Type", "Name", "Age", "Address", "Phone", "CurrentState", "Description", "EconomicValue", "Relationship", "IP", "ISP", "Storage", "OS", "TypeOfFile"]
@@ -61,7 +61,7 @@ if  __name__ == "__main__":
     parser.setFeature(xml.sax.handler.feature_namespaces, 0)
 
     # override the default ContextHandler
-    Handler = MovieHandler()
+    Handler = Handler()
     parser.setContentHandler( Handler )
 
     parser.parse("../XML/crime.xml")
